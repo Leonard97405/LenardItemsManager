@@ -9,6 +9,11 @@ namespace CustomItemTemplate
 {
     public class CustomTemplate : CustomItem
     {
+        public override void OnItemUsing(Player p)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void OnItemUsed(Player p)
         {
             Logger.Info("Item custom usato");
@@ -25,7 +30,7 @@ namespace CustomItemTemplate
             new SpawnProperties()
             {
                 RoomName = RoomName.Lcz330,
-                Offset = new Vector3(1.45f, 1.9f, -2.54f),
+                Offset = new SerializableVector3(1.45f, 1.9f, -2.54f),
                 Chance = 100,
             }
         };
