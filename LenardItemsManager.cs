@@ -149,7 +149,7 @@ namespace LenardItemsManager
                             Vector3 roomRotation = stanza.transform.eulerAngles;
 
 
-                            Vector3 rotatedOffset = Quaternion.Euler(roomRotation) * z.Offset.ToUnityVector() ;
+                            Vector3 rotatedOffset = Quaternion.Euler(roomRotation) * z.Offset ;
                             Vector3 finalPosition = roomPos + rotatedOffset;
                             
                             Pickup P = Pickup.Create(item.ItemType,finalPosition);
