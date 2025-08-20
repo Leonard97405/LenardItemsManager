@@ -62,6 +62,7 @@ namespace LenardItemsManager
             Timing.CallDelayed(2f, () => p.RemoveHint(hint));
         }
 
+        public abstract void OnItemUsing(Player p);
         public abstract void OnItemUsed(Player p);
 
     }

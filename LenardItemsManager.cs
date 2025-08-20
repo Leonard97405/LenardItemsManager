@@ -55,6 +55,12 @@ namespace LenardItemsManager
             return false;
         }
 
+        public bool HasItemEquipped(CustomItem I, Player p)
+        {
+            if (p.CurrentItem.Serial == I.Itemserial) return true;
+            return false;
+        }
+
         public void RegisterItem(CustomItem item)
         {
             if (item == null)
@@ -112,7 +118,6 @@ namespace LenardItemsManager
                         
                     }
                     SpawnItem(z);
-                    continue;
                 }
             }
             
@@ -135,7 +140,7 @@ namespace LenardItemsManager
             {
                 foreach (var z in item.SpawnLocations)
                 {
-                    if (RandomNumberGenerator.GetInt32(101) < z.Chance)
+                    if (RandomNumberGenerator.GetInt32(101) <= z.Chance)
                     {
                         var stanza = RoomIdentifier.AllRoomIdentifiers.FirstOrDefault(r => r.Name == z.RoomName);
                         if (stanza != null)
@@ -182,9 +187,22 @@ namespace LenardItemsManager
                 var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.UsableItem.Serial).ToList();
                 if (z.Any())
                 {
+                    z.FirstOrDefault().OnItemUsing(ev.Player);
+                }
+            }
+
+            public override void OnPlayerUsedItem(PlayerUsedItemEventArgs ev)
+            {
+                
+                var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.UsableItem.Serial).ToList();
+                if (z.Any())
+                {
                     z.FirstOrDefault().OnItemUsed(ev.Player);
                 }
             }
+            
+            
+
 
             public override void OnPlayerChangedItem(PlayerChangedItemEventArgs ev)
             {
@@ -195,10 +213,7 @@ namespace LenardItemsManager
                 }
             }
 
-            public override void OnPlayerHurting(PlayerHurtingEventArgs ev)
-            {
-                
-            }
+            
         }
         
         
