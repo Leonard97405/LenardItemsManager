@@ -30,7 +30,7 @@ namespace CustomItemTemplate
             new SpawnProperties()
             {
                 RoomName = RoomName.Lcz330,
-                Offset = new SerializableVector3(1.45f, 1.9f, -2.54f),
+                Offset = new Vector3(1.45f, 1.9f, -2.54f),
                 Chance = 100,
             }
         };
