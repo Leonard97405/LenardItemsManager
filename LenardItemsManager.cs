@@ -30,7 +30,6 @@ namespace LenardItemsManager
         public ItemEventManager Events { get; } = new ItemEventManager();
 
         public List<CustomItem> RegisteredItems = new List<CustomItem>();
-        private Dictionary<string, int> ItemSpawnCount { get; } = new Dictionary<string, int>();
 
         public override void Enable()
         {
@@ -41,7 +40,6 @@ namespace LenardItemsManager
         public override void Disable()
         {
             CustomHandlersManager.UnregisterEventsHandler(Events);
-            ItemSpawnCount.Clear();
         }
 
         public override string Name { get; } = "LenardItemsManager";
@@ -70,7 +68,7 @@ namespace LenardItemsManager
                 Logger.Warn("[RegisterItem] Item già registrato");
                 return;
             }
-
+			
             item.Itemserial = ItemSerialGenerator.GenerateNext();
             RegisteredItems.Add(item);
             Logger.Info("[RegisterItem] Item registrato: " + item.ItemName + " con id " + item.ItemId);
@@ -84,13 +82,14 @@ namespace LenardItemsManager
                 return false;
             }
 
-            if ((ItemSpawnCount.TryGetValue(item.ItemId, out int itemspawnati) && itemspawnati >= item.MaxItemSpawn)||!item.SpawnOnStart)
+            if (!item.SpawnOnStart)
             {
                 return false;
             }
             
             return true;
         }
+        
 
         public void TrySpawnItems()
         {
@@ -113,10 +112,11 @@ namespace LenardItemsManager
                         
                     }
                     SpawnItem(z);
+                    continue;
                 }
             }
-
-        }
+            
+        } 
 
         public IEnumerator<float> spawnDelayed(CustomItem i)
         {
@@ -151,8 +151,7 @@ namespace LenardItemsManager
                             P.Base.Info.Serial = item.Itemserial;
                             P.Base.Position = finalPosition;
                             ItemDistributor.SpawnPickup(P.Base);
-                            ItemSpawnCount.TryAdd(item.ItemId, 1);
-                            ItemSpawnCount[item.ItemId] += 1;
+                            
                         }
                     }
                 }
@@ -160,10 +159,7 @@ namespace LenardItemsManager
         }
         public class ItemEventManager : CustomEventsHandler
         {
-            public override void OnServerWaitingForPlayers()
-            {
-                Singleton.ItemSpawnCount.Clear();
-            }
+            
 
             public override void OnServerRoundStarted()
             {
