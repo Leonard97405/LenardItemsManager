@@ -45,7 +45,7 @@ namespace LenardItemsManager
         public override string Name { get; } = "LenardItemsManager";
         public override string Description { get; } = "Sistema per managing di item custom";
         public override string Author { get; } = "Lenard";
-        public override Version Version { get; } = new Version(1, 0, 0);
+        public override Version Version { get; } = new Version(1, 0, 1);
         public override Version RequiredApiVersion { get; } = new Version(LabApiProperties.CompiledVersion);
         public override LoadPriority Priority { get; } = LoadPriority.Highest;
 
@@ -149,7 +149,7 @@ namespace LenardItemsManager
                             Vector3 roomRotation = stanza.transform.eulerAngles;
 
 
-                            Vector3 rotatedOffset = Quaternion.Euler(roomRotation) * z.Offset ;
+                            Vector3 rotatedOffset = Quaternion.Euler(roomRotation) * z.Offset.ToUnityVector() ;
                             Vector3 finalPosition = roomPos + rotatedOffset;
                             
                             Pickup P = Pickup.Create(item.ItemType,finalPosition);
