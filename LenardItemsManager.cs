@@ -144,10 +144,11 @@ namespace LenardItemsManager
                     P.Base.Info.Serial = item.Itemserial;
                     foreach (var j in PedestalLocker.List)
                     {
-                        if(RandomNumberGenerator.GetInt32(101) <= item.SpawnInLockersChance)
-                        j.Base.Chambers.FirstOrDefault().Content.Add(P.Base);
-                        j.Chamber.AddItem(P.Type);
-                        j.Chamber.GetAllItems().LastOrDefault().Base.Info.Serial = item.Itemserial;
+                        if (RandomNumberGenerator.GetInt32(101) <= item.SpawnInLockersChance)
+                        {
+                            j.Chamber.AddItem(P.Type);
+                            j.Chamber.GetAllItems().LastOrDefault().Base.Info.Serial = item.Itemserial;
+                        }
                     }
                 }
                 foreach (var z in item.SpawnLocations)
