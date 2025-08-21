@@ -138,6 +138,15 @@ namespace LenardItemsManager
             }
             else
             {
+                if (item.SpawnInLockers)
+                {
+                    foreach (var j in PedestalLocker.List)
+                    {
+                        Pickup P = Pickup.Create(item.ItemType, new Vector3(750,-1000,750));
+                        P.Base.Info.Serial = item.Itemserial;
+                        j.Base.Chambers.FirstOrDefault().Content.Add(P.Base);
+                    }
+                }
                 foreach (var z in item.SpawnLocations)
                 {
                     if (RandomNumberGenerator.GetInt32(101) <= z.Chance)
