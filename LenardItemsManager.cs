@@ -61,6 +61,12 @@ namespace LenardItemsManager
             return false;
         }
 
+        public bool IsItemCustom(CustomItem I, ItemBase Z)
+        {
+            if (Z.ItemSerial == I.Itemserial) return true;
+            return false;
+        }
+
         public void RegisterItem(CustomItem item)
         {
             if (item == null)

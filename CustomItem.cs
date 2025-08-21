@@ -57,7 +57,7 @@ namespace LenardItemsManager
             var pD = PlayerDisplay.Get(p);
             DynamicHint hint = new DynamicHint()
             {
-                Text = $"Hai equippaggiato un <color={HintColor}>{ItemName}</color>\n {ItemDesc}",
+                Text = $"Hai equippaggiato un <color={HintColor}>{ItemName}</color> \n {ItemDesc}",
                 Id = ItemId + "equiphint",
                 FontSize = 30,
                 TargetY = 850,
