@@ -24,6 +24,8 @@ namespace CustomItemTemplate
         public override string ItemDesc { get; set; } = "Item di prova";
         public override ItemType ItemType { get; set; } = ItemType.Adrenaline;
         public override int SpawnChance { get; set; } = 100;
+        // Da usare per spawnare item nei locker
+        public override int SpawnInLockersChance { get; set; } = 0;
 
         public override SpawnProperties[] SpawnLocations { get; set; } = new[]
         {
