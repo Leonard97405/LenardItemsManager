@@ -140,11 +140,13 @@ namespace LenardItemsManager
             {
                 if (item.SpawnInLockers)
                 {
+                    Pickup P = Pickup.Create(item.ItemType, new Vector3(750,-1000,750));
+                    P.Base.Info.Serial = item.Itemserial;
                     foreach (var j in PedestalLocker.List)
                     {
-                        Pickup P = Pickup.Create(item.ItemType, new Vector3(750,-1000,750));
-                        P.Base.Info.Serial = item.Itemserial;
                         j.Base.Chambers.FirstOrDefault().Content.Add(P.Base);
+                        j.Chamber.AddItem(P.Type);
+                        j.Chamber.GetAllItems().LastOrDefault().Base.Info.Serial = item.Itemserial;
                     }
                 }
                 foreach (var z in item.SpawnLocations)
@@ -215,6 +217,7 @@ namespace LenardItemsManager
 
             public override void OnPlayerChangedItem(PlayerChangedItemEventArgs ev)
             {
+                if (ev.NewItem == null) return;
                 var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.NewItem.Serial);
                 if (z.Any())
                 {
