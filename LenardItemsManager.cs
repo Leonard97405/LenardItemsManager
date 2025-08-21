@@ -210,6 +210,42 @@ namespace LenardItemsManager
                 }
             }
 
+            public override void OnPlayerShootingWeapon(PlayerShootingWeaponEventArgs ev)
+            {
+                var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.FirearmItem.Serial).ToList();
+                if (z.Any())
+                {
+                    z.FirstOrDefault().OnItemUsing(ev.Player);
+                }
+            }
+
+            public override void OnPlayerShotWeapon(PlayerShotWeaponEventArgs ev)
+            {
+                var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.FirearmItem.Serial).ToList();
+                if (z.Any())
+                {
+                    z.FirstOrDefault().OnItemUsed(ev.Player);
+                }
+            }
+
+            public override void OnPlayerFlippingCoin(PlayerFlippingCoinEventArgs ev)
+            {
+                var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.CoinItem.Serial).ToList();
+                if (z.Any())
+                {
+                    z.FirstOrDefault().OnItemUsing(ev.Player);
+                }
+            }
+
+            public override void OnPlayerFlippedCoin(PlayerFlippedCoinEventArgs ev)
+            {
+                var z = Singleton.RegisteredItems.Where(i => i.Itemserial == ev.CoinItem.Serial).ToList();
+                if (z.Any())
+                {
+                    z.FirstOrDefault().OnItemUsed(ev.Player);
+                }
+            }
+
             public override void OnPlayerUsedItem(PlayerUsedItemEventArgs ev)
             {
                 
