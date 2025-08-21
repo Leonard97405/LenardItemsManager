@@ -138,12 +138,13 @@ namespace LenardItemsManager
             }
             else
             {
-                if (item.SpawnInLockers)
+                if (item.SpawnInLockersChance > 0)
                 {
                     Pickup P = Pickup.Create(item.ItemType, new Vector3(750,-1000,750));
                     P.Base.Info.Serial = item.Itemserial;
                     foreach (var j in PedestalLocker.List)
                     {
+                        if(RandomNumberGenerator.GetInt32(101) <= item.SpawnInLockersChance)
                         j.Base.Chambers.FirstOrDefault().Content.Add(P.Base);
                         j.Chamber.AddItem(P.Type);
                         j.Chamber.GetAllItems().LastOrDefault().Base.Info.Serial = item.Itemserial;

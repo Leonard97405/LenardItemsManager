@@ -26,7 +26,7 @@ namespace LenardItemsManager
         public abstract ItemType ItemType { get; set; }
 
         public abstract int SpawnChance { get; set; }
-        public virtual bool SpawnInLockers { get; set; }= false;
+        public virtual int SpawnInLockersChance { get; set; }= 50;
 
         public virtual bool SpawnOnStart { get; set; } = true;
         public virtual float SpawnAfter { get; set; } = 0;
