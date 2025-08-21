@@ -18,6 +18,7 @@ namespace LenardItemsManager
 
     public abstract class CustomItem
     {
+		public CustomItem(){}
         public abstract string ItemId { get; set; }
         
         public abstract string ItemName { get; set; }
