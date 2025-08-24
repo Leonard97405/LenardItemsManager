@@ -57,12 +57,14 @@ namespace LenardItemsManager
 
         public bool HasItemEquipped(CustomItem I, Player p)
         {
+			if(p.CurrentItem == null) return false;
             if (p.CurrentItem.Serial == I.Itemserial) return true;
             return false;
         }
 
         public bool IsItemCustom(CustomItem I, ItemBase Z)
         {
+            if(Z == null) return false;
             if (Z.ItemSerial == I.Itemserial) return true;
             return false;
         }
